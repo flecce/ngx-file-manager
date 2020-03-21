@@ -1,0 +1,16 @@
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th class="w-50" scope="col">Name</th>
+            <th scope="col">Last modified</th>
+            <th scope="col">Size</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let file of files">
+            <th scope="row">{{ file.name }}</th>
+            <td>{{ file.modified | date:'mediumDate' }}</td>
+            <td>{{ file.size | filesize }}</td>
+        </tr>
+    </tbody>
+</table>

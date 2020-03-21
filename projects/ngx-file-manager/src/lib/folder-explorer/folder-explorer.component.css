@@ -1,0 +1,9 @@
+/* Upload */
+
+.drop-zone {
+    border: dotted 2px lightgray;
+}
+
+.file-over-class {
+    border: dotted 2px #cce8ff;
+}

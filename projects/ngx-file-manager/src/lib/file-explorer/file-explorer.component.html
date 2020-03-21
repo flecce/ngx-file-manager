@@ -1,0 +1,12 @@
+<div class="w-100 d-flex flex-row-reverse p-2">
+    <button class="btn btn-sm" [ngClass]="viewType === 'grid' ? 'border' : 'border-0'" (click)="viewType = 'grid'">
+        <i class="fas fa-th text-secondary p-2"></i>
+    </button>
+    <button class="btn btn-sm" [ngClass]="viewType === 'list' ? 'border' : 'border-0'" (click)="viewType = 'list'">
+        <i class="fas fa-th-list text-secondary p-2"></i>
+    </button>
+</div>
+<div class="w-100 p-3 drop-zone" [ngClass]="{'file-over-class': hasAnotherDropZoneOver}" ng2FileDrop (fileOver)="fileOverAnother($event)" [uploader]="uploader">
+    <list-view *ngIf="viewType === 'list'" [files]="files"></list-view>
+    <grid-view *ngIf="viewType === 'grid'" [folders]="folders" [files]="files"></grid-view>
+</div>

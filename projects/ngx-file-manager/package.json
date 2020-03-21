@@ -1,0 +1,14 @@
+{
+    "name": "ngx-file-manager",
+    "version": "0.0.1",
+    "peerDependencies": {
+        "@angular/common": "^8.2.14",
+        "@angular/core": "^8.2.14",
+        "ngx-bootstrap": "^5.5.0",
+        "font-awesome": "^4.7.0",
+        "@ng/fontawesome-free": "^5.12.1",
+        "ngx-filesize": "^2.0.2",
+        "ng2-file-upload": "^1.4.0"
+    },
+    "dependencies": {}
+}

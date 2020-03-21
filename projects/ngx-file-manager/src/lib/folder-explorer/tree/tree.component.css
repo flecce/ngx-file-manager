@@ -1,0 +1,39 @@
+/* Remove default bullets */
+
+ul {
+    list-style-type: none;
+}
+
+.pointer {
+    cursor: pointer;
+    user-select: none;
+    /* Prevent text selection */
+}
+
+.nested {
+    display: none;
+}
+
+.active {
+    display: block;
+}
+
+.selected {
+    background-color: #cce8ff;
+}
+
+.folder {
+    color: #FFC107;
+}
+
+
+/* Upload */
+
+.drop-zone {
+    border: dotted 2px transparent;
+}
+
+.file-over {
+    background-color: #cce8ff;
+    border: dotted 2px #cce8ff;
+}
