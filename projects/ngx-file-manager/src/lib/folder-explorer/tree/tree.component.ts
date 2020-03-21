@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
-import { zip } from 'rxjs';
+import { Subject, Observable, Subscription } from 'rxjs';
+import { TreeService } from '../tree.service';
 
 const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 
@@ -9,30 +10,32 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
   templateUrl: './tree.component.html',
   styleUrls: ['./tree.component.css']
 })
-export class TreeComponent implements OnInit {
+export class TreeComponent implements OnInit, OnDestroy {
   @Input() parentId: string;
   @Input() dataList: any[];
 
-  @Output('select') selectChange = new EventEmitter<any>();
-
+  subscription: Subscription;
   selected: any;
   hasAnotherDropZoneOver: boolean;
 
-  constructor() {
+  constructor(private treeService: TreeService) {
+    this.subscription = treeService.select$.subscribe(msg => {
+      this.dataList.forEach(x => {
+        if (msg.node.item.id !== x.id) {
+          x.selected = false;
+        }
+      });
+    });
   }
 
   ngOnInit() {
   }
 
-  test(item) {
-    debugger;
-    this.dataList.forEach(x => {
-      if (item.id !== x.id)
-        x.selected = false;
-    })
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
-  createUploader(): FileUploader {
+  private createUploader(): FileUploader {
     return new FileUploader({
       url: URL,
       disableMultipart: true, // 'DisableMultipart' must be 'true' for formatDataFunction to be called.
@@ -69,7 +72,7 @@ export class TreeComponent implements OnInit {
 
   select(event, item): void {
     item.selected = !item.selected;
-    this.selectChange.emit(item);
+    this.treeService.select({ item });
 
     event.stopPropagation();
   }

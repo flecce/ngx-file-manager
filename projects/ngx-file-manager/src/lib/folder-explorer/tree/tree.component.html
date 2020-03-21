@@ -6,7 +6,7 @@
             </span>
             <i class="far fa-folder mr-1 folder"></i>
             <span (click)="select($event, item)" ng2FileDrop [ngClass]="{ 'file-over': item.hasAnotherDropZoneOver, 'selected': item.selected }" (fileOver)="fileOver($event, item)" [uploader]="createUploader()" class="drop-zone">{{ item.name }}</span>
-            <tree (select)="test($event)" *ngIf="hasChildren(item)" [ngClass]="item.closed ? 'nested' : 'active'" [parentId]="item.id" [dataList]="removeCurrentLevelItems(dataList, parentId)"></tree>
+            <tree *ngIf="hasChildren(item)" [ngClass]="item.closed ? 'nested' : 'active'" [parentId]="item.id" [dataList]="removeCurrentLevelItems(dataList, parentId)"></tree>
         </li>
     </ul>
 </div>

@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { IFolder } from '../models/folder.model';
-import { FileUploader, FileItem } from 'ng2-file-upload';
+import { FileUploader } from 'ng2-file-upload';
 
 @Component({
   selector: 'folder-explorer',

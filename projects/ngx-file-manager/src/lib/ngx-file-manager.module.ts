@@ -33,6 +33,8 @@ import { FileManagerComponent } from './file-manager/file-manager.component';
     FolderExplorerComponent,
     TreeComponent,
     FileExplorerComponent
+  ],
+  providers: [
   ]
 })
 export class NgxFileManagerModule {
