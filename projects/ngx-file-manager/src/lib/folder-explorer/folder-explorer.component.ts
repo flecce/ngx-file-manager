@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { IFolder } from '../models/folder.model';
-import { FileUploader } from 'ng2-file-upload';
+import { FileUploader, FileItem } from 'ng2-file-upload';
 
 @Component({
   selector: 'folder-explorer',
@@ -25,6 +25,10 @@ export class FolderExplorerComponent implements OnInit {
     this.hasAnotherDropZoneOver = e;
   }
 
+  onFileDrop(e: any) {
+    this.uploader.uploadAll();
+  }
+
   onFileSelected(e: any) {
     console.log(e);
     //item.upload()
@@ -33,18 +37,18 @@ export class FolderExplorerComponent implements OnInit {
   private initUploader(): void {
     this.uploader = new FileUploader({
       url: this.uploadUrl,
-      disableMultipart: true, // 'DisableMultipart' must be 'true' for formatDataFunction to be called.
-      formatDataFunctionIsAsync: true,
-      formatDataFunction: async (item) => {
-        return new Promise((resolve, reject) => {
-          resolve({
-            name: item._file.name,
-            length: item._file.size,
-            contentType: item._file.type,
-            date: new Date()
-          });
-        });
-      }
+      // disableMultipart: true, // 'DisableMultipart' must be 'true' for formatDataFunction to be called.
+      // formatDataFunctionIsAsync: true,
+      // formatDataFunction: async (item) => {
+      //   return new Promise((resolve, reject) => {
+      //     resolve({
+      //       name: item._file.name,
+      //       length: item._file.size,
+      //       contentType: item._file.type,
+      //       date: new Date()
+      //     });
+      //   });
+      // }
     });
   }
 }

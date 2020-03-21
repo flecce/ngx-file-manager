@@ -1,36 +1,21 @@
 <div class="p-3 mt-2">
-    <div ng2FileDrop [ngClass]="{'file-over-class': hasAnotherDropZoneOver}" (fileOver)="fileOver($event)" (onFileSelected)="onFileSelected($event)" [uploader]="uploader" class="p-3 drop-zone">
-        Upload here
+    <div ng2FileDrop [ngClass]="{'file-over-class': hasAnotherDropZoneOver}" (fileOver)="fileOver($event)" (onFileDrop)="onFileDrop($event)" (onFileSelected)="onFileSelected($event)" [uploader]="uploader" class="p-3 mb-2 drop-zone text-center">
+        <i class="fas fa-file-upload fa-lg text-secondary"></i>
     </div>
-    <table class="table mt-2" *ngIf="uploader.queue.length > 0">
-        <tbody>
-            <tr *ngFor="let item of uploader.queue">
-                <td><strong>{{ item?.file?.name }}</strong></td>
-                <!-- <td *ngIf="uploader.options.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td> -->
-                <td *ngIf="uploader.options.isHTML5">
-                    <div class="progress" style="margin-bottom: 0;">
-                        <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
-                    </div>
-                </td>
-                <td class="text-center">
-                    <span *ngIf="item.isSuccess"><i class="fas fa-check-circle text-success"></i></span>
-                    <span *ngIf="item.isCancel"><i class="fas fa-ban text-warning"></i></span>
-                    <span *ngIf="item.isError"><i class="fas fa-times-circle text-danger"></i></span>
-                </td>
-                <!-- <td nowrap>
-                    <button type="button" class="btn btn-success btn-xs" (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
-                    <span class="glyphicon glyphicon-upload"></span> Upload
-                </button>
-                    <button type="button" class="btn btn-warning btn-xs" (click)="item.cancel()" [disabled]="!item.isUploading">
-                    <span class="glyphicon glyphicon-ban-circle"></span> Cancel
-                </button>
-                    <button type="button" class="btn btn-danger btn-xs" (click)="item.remove()">
-                    <span class="glyphicon glyphicon-trash"></span> Remove
-                </button>
-                </td> -->
-            </tr>
-        </tbody>
-    </table>
+    <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let item of uploader.queue">
+            <strong class="flex-grow-1">{{ item?.file?.name }}</strong>
+            <div class="progress flex-grow-1 mr-2" *ngIf="uploader.options.isHTML5">
+                <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
+            </div>
+            <i *ngIf="item.isSuccess" class="fas fa-check-circle text-success"></i>
+            <i *ngIf="item.isCancel" class="fas fa-ban text-warning"></i>
+            <i *ngIf="item.isError" class="fas fa-times-circle text-danger"></i>
+            <button class="btn btn-light btn-sm ml-2" (click)="item.cancel(); item.remove();" [disabled]="!item.isUploading">
+                <i class="fas fa-times-circle"></i>
+            </button>
+        </li>
+    </ul>
 </div>
 <div class="p-3">
     <tree [parentId]="'9e25f3c5-8f69-45b4-9838-b37af0b92371'" [dataList]="folders"></tree>
