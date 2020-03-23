@@ -18,16 +18,6 @@
                 </div>
             </div>
 
-            <!-- <div class="d-flex">
-                <div class="flex-grow-1">
-                    <i class="far fa-folder mr-2 folder"></i>
-                    <span (click)="select($event, item)" [ngClass]="{ 'selected': item.selected }">{{ item.name }}</span>
-                </div>
-                <div class="progress flex-grow-1" style="height: 1px;" *ngIf="item.uploader.options.isHTML5">
-                    <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.uploader.progress + '%' }"></div>
-                </div>
-            </div> -->
-
             <tree *ngIf="hasChildren(item)" [ngClass]="item.closed ? 'nested' : 'active'" [parentId]="item.id" [dataList]="removeCurrentLevelItems(dataList, parentId)"></tree>
         </li>
     </ul>
