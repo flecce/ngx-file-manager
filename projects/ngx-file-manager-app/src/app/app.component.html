@@ -1,1 +1,1 @@
-<file-manager [uploadUrl]="'http://localhost:58642/api/file'" [folders]="folders" [files]="files"></file-manager>
+<file-manager [uploadUrl]="'http://localhost:58642/api/file'" [folders]="folders" [items]="selectedItems" (onFolderSelect)="onFolderSelect($event)"></file-manager>

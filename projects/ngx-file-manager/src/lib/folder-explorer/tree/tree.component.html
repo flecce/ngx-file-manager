@@ -11,8 +11,10 @@
                     <i class="far fa-folder mr-2 folder"></i>
                 </div>
                 <div class="flex-grow-1 d-flex flex-column">
-                    <span (click)="select($event, item)" [ngClass]="{ 'selected': item.selected }">{{ item.name }}</span>
-                    <div *ngIf="item.uploader.options.isHTML5 && item.uploader.queue.length > 0" class="progress flex-grow-1" style="height: 1px;">
+                    <span (click)="select($event, item)" [ngClass]="{ 'selected': item.selected }" class="p-1">
+                        {{ item.name }}
+                    </span>
+                    <div *ngIf="item.uploader.options.isHTML5 && item.uploader.isUploading" class="progress flex-grow-1" style="height: 1px;">
                         <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.uploader.progress + '%' }"></div>
                     </div>
                 </div>

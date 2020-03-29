@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { FileUploader } from 'ng2-file-upload';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
+import { FileUploader, FileItem, ParsedResponseHeaders } from 'ng2-file-upload';
 import { Subscription } from 'rxjs';
 import { TreeService } from '../tree.service';
 
@@ -12,18 +12,17 @@ export class TreeComponent implements OnInit, OnDestroy {
   @Input() parentId: string;
   @Input() dataList: any[];
   @Input() uploadUrl: string;
+  @Output('onUploadError') onUploadError: EventEmitter<any> = new EventEmitter<any>();
 
-  uploaders: FileUploader[] = [];
-
-  subscription: Subscription;
-  selected: any;
-  hasAnotherDropZoneOver: boolean;
+  private subscription: Subscription;
+  public selected: any;
+  public hasAnotherDropZoneOver: boolean;
 
   constructor(
     private treeService: TreeService) {
     this.subscription = treeService.select$.subscribe(msg => {
       this.dataList.forEach(x => {
-        if (msg.node.item.id !== x.id) {
+        if (msg.folderId !== x.id) {
           x.selected = false;
         }
       });
@@ -36,6 +35,14 @@ export class TreeComponent implements OnInit, OnDestroy {
         url: this.uploadUrl,
         autoUpload: true
       });
+
+      item.uploader.onErrorItem = ((item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any => {
+        this.onUploadError.emit({
+          fileName: item.file.name,
+          response: response,
+          status: status
+        });
+      });
     }
   }
 
@@ -44,7 +51,7 @@ export class TreeComponent implements OnInit, OnDestroy {
   }
 
   createUploader(): FileUploader {
-    return new FileUploader({
+    const uploader = new FileUploader({
       url: this.uploadUrl,
       autoUpload: true,
       // disableMultipart: true, // 'DisableMultipart' must be 'true' for formatDataFunction to be called.
@@ -60,6 +67,8 @@ export class TreeComponent implements OnInit, OnDestroy {
       //   });
       // }
     });
+
+    return uploader;
   }
 
   removeCurrentLevelItems(datalist, parentId): any[] {

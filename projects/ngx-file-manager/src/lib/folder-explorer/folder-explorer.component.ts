@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { IFolder } from '../models/folder.model';
 import { FileUploader } from 'ng2-file-upload';
+import { TreeService } from './tree.service';
+import { FolderItem } from '../models/folder-item.model';
 
 @Component({
   selector: 'folder-explorer',
@@ -8,13 +9,17 @@ import { FileUploader } from 'ng2-file-upload';
   styleUrls: ['./folder-explorer.component.css']
 })
 export class FolderExplorerComponent implements OnInit {
-  @Input() folders: IFolder[];
+  @Input() folders: FolderItem[];
   @Input() uploadUrl: string;
+  @Output() onFolderSelect: EventEmitter<string> = new EventEmitter<string>();
 
   uploader: FileUploader;
   hasAnotherDropZoneOver: boolean;
 
-  constructor() {
+  constructor(private treeService: TreeService) {
+    treeService.select$.subscribe(folderId => {
+      this.onFolderSelect.emit(folderId);
+    });
   }
 
   ngOnInit() {
@@ -25,18 +30,10 @@ export class FolderExplorerComponent implements OnInit {
     this.hasAnotherDropZoneOver = e;
   }
 
-  onFileDrop(e: any) {
-    this.uploader.uploadAll();
-  }
-
-  onFileSelected(e: any) {
-    console.log(e);
-    //item.upload()
-  }
-
   private initUploader(): void {
     this.uploader = new FileUploader({
       url: this.uploadUrl,
+      autoUpload: true
       // disableMultipart: true, // 'DisableMultipart' must be 'true' for formatDataFunction to be called.
       // formatDataFunctionIsAsync: true,
       // formatDataFunction: async (item) => {

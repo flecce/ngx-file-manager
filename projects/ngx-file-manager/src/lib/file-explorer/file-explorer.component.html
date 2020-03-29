@@ -7,6 +7,6 @@
     </button>
 </div>
 <div class="w-100 p-3 drop-zone" [ngClass]="{'file-over-class': hasAnotherDropZoneOver}" ng2FileDrop (fileOver)="fileOverAnother($event)" [uploader]="uploader">
-    <list-view *ngIf="viewType === 'list'" [files]="files"></list-view>
+    <list-view *ngIf="viewType === 'list'" [folders]="folders" [files]="files"></list-view>
     <grid-view *ngIf="viewType === 'grid'" [folders]="folders" [files]="files"></grid-view>
 </div>

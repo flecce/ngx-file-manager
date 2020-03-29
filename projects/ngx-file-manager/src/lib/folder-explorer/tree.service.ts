@@ -6,7 +6,7 @@ export class TreeService {
     private selectSbj = new Subject<any>();
     public select$ = this.selectSbj.asObservable();
 
-    select(item: any) {
-        this.selectSbj.next({ node: item });
+    select(e: any) {
+        this.selectSbj.next({ folderId: e.item.id });
     }
 }

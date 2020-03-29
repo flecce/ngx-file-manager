@@ -1,14 +1,22 @@
 <table class="table table-hover">
     <thead>
         <tr>
-            <th class="w-50" scope="col">Name</th>
+            <th></th>
+            <th class="w-50">Name</th>
             <th scope="col">Last modified</th>
             <th scope="col">Size</th>
         </tr>
     </thead>
     <tbody>
+        <tr *ngFor="let folder of folders">
+            <td><i class="far fa-folder"></i></td>
+            <td>{{ folder.name }}</td>
+            <td>{{ folder.modified | date:'mediumDate' }}</td>
+            <td>-</td>
+        </tr>
         <tr *ngFor="let file of files">
-            <th scope="row">{{ file.name }}</th>
+            <td><i class="far fa-file mr-1"></i></td>
+            <td>{{ file.name }}</td>
             <td>{{ file.modified | date:'mediumDate' }}</td>
             <td>{{ file.size | filesize }}</td>
         </tr>

@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { FolderItem } from 'projects/ngx-file-manager/src/lib/models/folder-item.model';
+import { FileItem } from 'projects/ngx-file-manager/src/lib/models/file-item.model';
+import { IItem } from 'projects/ngx-file-manager/src/lib/models/item.model';
 
 @Component({
   selector: 'app-root',
@@ -6,172 +9,57 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  public folders: any[];
-  public files: any[];
+  public folders: FolderItem[];
+  public files: FileItem[];
+  public selectedItems: IItem[];
 
   constructor() {
     this.folders = [
-      {
-        id: '9e25f3c5-8f69-45b4-9838-b37af0b92371',
-        name: '/',
-        parent: null,
-        readonly: false,
-        created: new Date(),
-        modified: new Date()
-      },
-      {
-        id: '3752b342-efb9-443f-bcfe-eaef762ea425',
-        name: 'home',
-        parent: '9e25f3c5-8f69-45b4-9838-b37af0b92371',
-        readonly: false,
-        created: new Date(),
-        modified: new Date()
-      },
-      {
-        id: '1786ad1b-1abc-4f95-9bd0-6c00b6d7e739',
-        name: 'media',
-        parent: '3752b342-efb9-443f-bcfe-eaef762ea425',
-        readonly: false,
-        created: new Date(),
-        modified: new Date()
-      },
-      {
-        id: '82a73934-30c3-4818-84bd-1804c4526e40',
-        name: 'tmp',
-        parent: '3752b342-efb9-443f-bcfe-eaef762ea425',
-        readonly: false,
-        created: new Date(),
-        modified: new Date()
-      },
-      {
-        id: '82cb4c27-fba9-4651-bbcf-0c24c344f97e',
-        name: 'bin',
-        parent: '82a73934-30c3-4818-84bd-1804c4526e40',
-        readonly: false,
-        created: new Date(),
-        modified: new Date()
-      },
-      {
-        id: '12827268-360d-4f36-89d6-a0718f01e32a',
-        name: 'sys',
-        parent: '9e25f3c5-8f69-45b4-9838-b37af0b92371',
-        readonly: false,
-        created: new Date(),
-        modified: new Date()
-      },
-      {
-        id: '59b3bb7c-75a3-4447-b9f2-5458e9526d89',
-        name: 'test',
-        parent: '9e25f3c5-8f69-45b4-9838-b37af0b92371',
-        readonly: false,
-        created: new Date(),
-        modified: new Date()
-      },
-      {
-        id: '6e0757f0-0487-417b-b817-a17258cf685a',
-        name: 'bin',
-        parent: '9e25f3c5-8f69-45b4-9838-b37af0b92371',
-        readonly: false,
-        created: new Date(),
-        modified: new Date()
-      },
-      {
-        id: 'b3a484f6-9fa7-4134-8ae8-06a09aff14a1',
-        name: 'user',
-        parent: '9e25f3c5-8f69-45b4-9838-b37af0b92371',
-        readonly: false,
-        created: new Date(),
-        modified: new Date()
-      },
-      {
-        id: 'cb55a70c-fe0f-4f78-a7db-6b1175ef6b7f',
-        name: 'flecce',
-        parent: 'b3a484f6-9fa7-4134-8ae8-06a09aff14a1',
-        readonly: false,
-        created: new Date(),
-        modified: new Date()
-      },
-      {
-        id: 'd1524384-08b0-435c-b08c-898b056fa380',
-        name: 'snardin',
-        parent: 'b3a484f6-9fa7-4134-8ae8-06a09aff14a1',
-        readonly: false,
-        created: new Date(),
-        modified: new Date()
-      }
+      this.createFolder('9e25f3c5-8f69-45b4-9838-b37af0b92371', '/', null),
+      this.createFolder('3752b342-efb9-443f-bcfe-eaef762ea425', 'home', '9e25f3c5-8f69-45b4-9838-b37af0b92371'),
+      this.createFolder('1786ad1b-1abc-4f95-9bd0-6c00b6d7e739', 'media', '9e25f3c5-8f69-45b4-9838-b37af0b92371'),
+      this.createFolder('1786ad1b-1abc-4f95-9bd0-6c00b6d7e740', 'images', '1786ad1b-1abc-4f95-9bd0-6c00b6d7e739')
     ];
 
     this.files = [
-      {
-        id: 'c3490600-004e-4c06-b53f-86d2f9ec9c6a',
-        name: 'typescript.pdf',
-        folderId: '1786ad1b-1abc-4f95-9bd0-6c00b6d7e739',
-        size: 100,
-        readonly: false,
-        format: 'pdf',
-        created: new Date(),
-        modified: new Date()
-      },
-      {
-        id: 'c3490600-004e-4c06-b53f-86d2f9ec9c6a',
-        name: 'typescript.pdf',
-        folderId: '1786ad1b-1abc-4f95-9bd0-6c00b6d7e739',
-        size: 100,
-        readonly: false,
-        format: 'pdf',
-        created: new Date(),
-        modified: new Date()
-      },
-      {
-        id: 'c3490600-004e-4c06-b53f-86d2f9ec9c6a',
-        name: 'typescript.pdf',
-        folderId: '1786ad1b-1abc-4f95-9bd0-6c00b6d7e739',
-        size: 100,
-        readonly: false,
-        format: 'pdf',
-        created: new Date(),
-        modified: new Date()
-      },
-      {
-        id: 'c3490600-004e-4c06-b53f-86d2f9ec9c6a',
-        name: 'typescript.pdf',
-        folderId: '1786ad1b-1abc-4f95-9bd0-6c00b6d7e739',
-        size: 100,
-        readonly: false,
-        format: 'pdf',
-        created: new Date(),
-        modified: new Date()
-      },
-      {
-        id: 'c3490600-004e-4c06-b53f-86d2f9ec9c6a',
-        name: 'typescript.pdf',
-        folderId: '1786ad1b-1abc-4f95-9bd0-6c00b6d7e739',
-        size: 100,
-        readonly: false,
-        format: 'pdf',
-        created: new Date(),
-        modified: new Date()
-      },
-      {
-        id: 'c3490600-004e-4c06-b53f-86d2f9ec9c6a',
-        name: 'typescript.pdf',
-        folderId: '1786ad1b-1abc-4f95-9bd0-6c00b6d7e739',
-        size: 100,
-        readonly: false,
-        format: 'pdf',
-        created: new Date(),
-        modified: new Date()
-      },
-      {
-        id: 'c3490600-004e-4c06-b53f-86d2f9ec9c6a',
-        name: 'typescript.pdf',
-        folderId: '1786ad1b-1abc-4f95-9bd0-6c00b6d7e739',
-        size: 100,
-        readonly: false,
-        format: 'pdf',
-        created: new Date(),
-        modified: new Date()
-      }
+      this.createFile('c3490600-004e-4c06-b53f-86d2f9ec9c6a', 'file1.pdf', '1786ad1b-1abc-4f95-9bd0-6c00b6d7e739'),
+      this.createFile('c3490600-004e-4c06-b53f-86d2f9ec9c6b', 'file2.pdf', '1786ad1b-1abc-4f95-9bd0-6c00b6d7e739'),
+      this.createFile('c3490600-004e-4c06-b53f-86d2f9ec9c6c', 'file3.pdf', '1786ad1b-1abc-4f95-9bd0-6c00b6d7e739'),
+      this.createFile('c3490600-004e-4c06-b53f-86d2f9ec9c6d', 'file4.pdf', '1786ad1b-1abc-4f95-9bd0-6c00b6d7e739'),
+      this.createFile('c3490600-004e-4c06-b53f-86d2f9ec9c6e', 'file5.pdf', '1786ad1b-1abc-4f95-9bd0-6c00b6d7e739'),
+      this.createFile('c3490600-004e-4c06-b53f-86d2f9ec9c6f', 'file6.pdf', '1786ad1b-1abc-4f95-9bd0-6c00b6d7e739'),
+      this.createFile('c3490600-004e-4c06-b53f-86d2f9ec9c6g', 'file7.pdf', '1786ad1b-1abc-4f95-9bd0-6c00b6d7e739')
     ];
+  }
+
+  private createFolder(id: string, name: string, parent: string): FolderItem {
+    let folder = new FolderItem();
+    folder.id = id;
+    folder.name = name;
+    folder.parent = parent;
+    folder.readonly = false;
+    folder.created = new Date();
+    folder.modified = new Date();
+
+    return folder;
+  }
+
+  private createFile(id: string, name: string, folderId: string): FileItem {
+    let file = new FileItem();
+    file.id = id;
+    file.name = name;
+    file.folderId = folderId;
+    file.size = 100;
+    file.readonly = false;
+    file.extension = '';
+    file.created = new Date();
+    file.modified = new Date();
+
+    return file;
+  }
+
+  onFolderSelect(e: any): void {
+    this.selectedItems = this.files.filter(file => file.folderId === e.folderId) as IItem[];
+    this.selectedItems = this.selectedItems.concat(this.folders.filter(folder => folder.parent === e.folderId) as IItem[]);
   }
 }

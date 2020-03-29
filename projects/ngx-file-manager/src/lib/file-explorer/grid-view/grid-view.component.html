@@ -1,4 +1,7 @@
-<p>Folders</p>
+<p class="small font-weight-bold">Folders</p>
+<div *ngIf="folders?.length <= 0" class="w-100 d-flex justify-content-center small font-italic">
+    No items
+</div>
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
     <div class="col mb-4" *ngFor="let folder of folders">
         <div class="card">
@@ -8,7 +11,10 @@
         </div>
     </div>
 </div>
-<p>Files</p>
+<p class="small font-weight-bold">Files</p>
+<div *ngIf="files?.length <= 0" class="w-100 d-flex justify-content-center small font-italic">
+    No items
+</div>
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
     <div class="col mb-4" *ngFor="let file of files">
         <div class="card">

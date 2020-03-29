@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IFile } from '../../models/file.model';
-import { IFolder } from '../../models/folder.model';
+import { FolderItem } from '../../models/folder-item.model';
+import { FileItem } from '../../models/file-item.model';
 
 @Component({
   selector: 'grid-view',
@@ -8,8 +8,8 @@ import { IFolder } from '../../models/folder.model';
   styleUrls: ['./grid-view.component.css']
 })
 export class GridViewComponent implements OnInit {
-  @Input() files: IFile[];
-  @Input() folders: IFolder[];
+  @Input() folders: FolderItem[];
+  @Input() files: FileItem[];
 
   constructor() { }
 
