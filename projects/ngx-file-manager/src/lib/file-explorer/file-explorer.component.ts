@@ -21,6 +21,9 @@ export class FileExplorerComponent implements OnInit, OnChanges {
   uploader: FileUploader;
   hasAnotherDropZoneOver: boolean;
 
+  selectedItem: any;
+  isFileInfoVisible = false;
+
   constructor() {
     this.uploader = new FileUploader({
       url: this.uploadUrl,
@@ -39,19 +42,25 @@ export class FileExplorerComponent implements OnInit, OnChanges {
       //}
     });
   }
+
   ngOnChanges(changes: SimpleChanges): void {
     this.folders = this.items ? this.items.filter(item => item.itemType === ItemType.Folder) as FolderItem[] : [];
     this.files = this.items ? this.items.filter(item => item.itemType === ItemType.File) as FileItem[] : [];
-
-    console.log('fodlers', this.folders);
-    console.log('files', this.files);
   }
 
   ngOnInit() {
   }
 
-  public fileOverAnother(e: any): void {
+  fileOverAnother(e: any): void {
     this.hasAnotherDropZoneOver = e;
+  }
+
+  onFolderSelect(e: any): void {
+    this.selectedItem = e;
+    this.isFileInfoVisible = !this.isFileInfoVisible;
+  }
+
+  onFileSelect(e: any): void {
   }
 
 }

@@ -6,7 +6,28 @@
         <i class="fas fa-th-list text-secondary p-2"></i>
     </button>
 </div>
-<div class="w-100 p-3 drop-zone" [ngClass]="{'file-over-class': hasAnotherDropZoneOver}" ng2FileDrop (fileOver)="fileOverAnother($event)" [uploader]="uploader">
-    <list-view *ngIf="viewType === 'list'" [folders]="folders" [files]="files"></list-view>
-    <grid-view *ngIf="viewType === 'grid'" [folders]="folders" [files]="files"></grid-view>
+<div class="row">
+    <div [ngClass]="!isFileInfoVisible ? 'col-12' : 'col-9'">
+        <div class="w-100 p-3 drop-zone" [ngClass]="{'file-over-class': hasAnotherDropZoneOver}" ng2FileDrop (fileOver)="fileOverAnother($event)" [uploader]="uploader">
+            <list-view *ngIf="viewType === 'list'" [folders]="folders" [files]="files"></list-view>
+            <grid-view *ngIf="viewType === 'grid'" [folders]="folders" [files]="files" (onFolderSelect)="onFolderSelect($event)" (onFileSelect)="onFileSelect($event)"></grid-view>
+        </div>
+    </div>
+    <div *ngIf="isFileInfoVisible" class="col-3">
+        <div class="d-flex flex-column">
+            <div class="p-2 d-flex justify-content-center">
+                <i class="far fa-folder fa-3x"></i>
+            </div>
+            <div class="p-2">
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <th scope="row">Name</th>
+                            <td>{{ selectedItem?.name }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
