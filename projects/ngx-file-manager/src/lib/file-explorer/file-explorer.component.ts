@@ -14,6 +14,9 @@ export class FileExplorerComponent implements OnInit, OnChanges {
   @Input() items: Item[];
   @Input() uploadUrl: string;
 
+  FolderType = ItemType.Folder;
+  FileType = ItemType.File;
+
   folders: FolderItem[];
   files: FileItem[];
 
@@ -57,10 +60,12 @@ export class FileExplorerComponent implements OnInit, OnChanges {
 
   onFolderSelect(e: any): void {
     this.selectedItem = e;
-    this.isFileInfoVisible = !this.isFileInfoVisible;
+    this.isFileInfoVisible = true;
   }
 
   onFileSelect(e: any): void {
+    this.selectedItem = e;
+    this.isFileInfoVisible = true;
   }
 
 }

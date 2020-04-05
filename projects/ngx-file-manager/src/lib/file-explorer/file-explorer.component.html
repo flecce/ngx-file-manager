@@ -13,10 +13,16 @@
             <grid-view *ngIf="viewType === 'grid'" [folders]="folders" [files]="files" (onFolderSelect)="onFolderSelect($event)" (onFileSelect)="onFileSelect($event)"></grid-view>
         </div>
     </div>
-    <div *ngIf="isFileInfoVisible" class="col-3">
+    <div *ngIf="isFileInfoVisible" class="col-3 border-left">
         <div class="d-flex flex-column">
+            <div class="d-flex flex-row-reverse">
+                <button class="btn btn-sm btn-light" (click)="isFileInfoVisible = false">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
             <div class="p-2 d-flex justify-content-center">
-                <i class="far fa-folder fa-3x"></i>
+                <i *ngIf="selectedItem?.itemType === FolderType" class="far fa-folder fa-3x"></i>
+                <i *ngIf="selectedItem?.itemType === FileType" class="far fa-file fa-3x"></i>
             </div>
             <div class="p-2">
                 <table class="table table-borderless">
@@ -24,6 +30,22 @@
                         <tr>
                             <th scope="row">Name</th>
                             <td>{{ selectedItem?.name }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Type</th>
+                            <td>{{ selectedItem?.type }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Size</th>
+                            <td>{{ selectedItem?.size }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Created</th>
+                            <td>{{ selectedItem?.created }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Modified</th>
+                            <td>{{ selectedItem?.modified }}</td>
                         </tr>
                     </tbody>
                 </table>
